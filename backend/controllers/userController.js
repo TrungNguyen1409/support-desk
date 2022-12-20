@@ -43,7 +43,7 @@ const registerUser = asyncHandler(async (req,res) => {
             _id:user._id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id)
+            token: generateToken(user._id,user.name)
         })
     }else{
         res.status(400)
@@ -68,7 +68,7 @@ const loginUser = asyncHandler(async (req,res) => {
             _id:user._id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id)
+            token: generateToken(user._id,user.name)
         })
     } else {
         res.status(401)
@@ -83,14 +83,20 @@ const loginUser = asyncHandler(async (req,res) => {
 // @access  Private 
 
 const getMe = asyncHandler(async (req,res) => {
-    res.send('me')
+    const user = {
+
+        id: req.user._id,
+        email: req.user.email,
+        name: req.user.name
+    }
+    res.status(200).json(user)
 })
 
 
 
 // Generate token
-const generateToken =(id) => {
-    return jwt.sign({id}, process.env.JWT_SECRET, {
+const generateToken =(id,name) => {
+    return jwt.sign({id,name}, process.env.JWT_SECRET, {
         expiresIn: '30d'
     })
 }
