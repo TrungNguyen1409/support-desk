@@ -1,9 +1,13 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
+const {errorHandler} = require('./middleware/errorMiddleware')
 const PORT = process.env.PORT || 8000;
 
 const app = express()
 
+// these middlewares allow the app to parse JSON , read , . . . 
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 
 app.get('/', (req,res) => {
     res.status(200).json({message: "Welcome to the support desk API"})
@@ -12,5 +16,7 @@ app.get('/', (req,res) => {
 
 // use the file userRoutes for /api/users
 app.use('/api/users', require('./routes/userRoutes.js'))
+
+app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`Server starts on port ${PORT}`))
