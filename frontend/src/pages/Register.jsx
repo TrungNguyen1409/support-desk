@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {toast} from 'react-toastify'
 import {FaUser} from 'react-icons/fa'
 
 function Register() {
@@ -16,7 +17,16 @@ function Register() {
     setFormData((prevState) =>({
       ...prevState,
       [e.target.name]: e.target.value,
+      
     }))
+  }
+
+  const onSubmit = (e)=>{
+    e.preventDefault()
+    
+    if(password !== password2){
+      toast.error('Passwords do not match')
+    }
   }
 
   return (
@@ -27,8 +37,9 @@ function Register() {
         </h1>
         <p>Please create an account</p>
       </section>
+
       <section className="form">
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="form-group">
             <input 
               type="text" 
@@ -38,7 +49,47 @@ function Register() {
               value={name} 
               onChange={onChange} 
               placeholder='Enter you name' 
+              required
             />
+          </div>
+          <div className="form-group">
+            <input 
+              type="email" 
+              className="form-control" 
+              id='email' 
+              name = 'email'
+              value={email} 
+              onChange={onChange} 
+              placeholder='Enter you Email' 
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input 
+              type="password" 
+              className="form-control" 
+              id='password' 
+              name = 'password'
+              value={password} 
+              onChange={onChange} 
+              placeholder='Enter you Password' 
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input 
+              type="password" 
+              className="form-control" 
+              id='password2' 
+              name = 'password2'
+              value={password2} 
+              onChange={onChange} 
+              placeholder='Confirm your Password' 
+              required
+            />
+          </div>
+          <div className="form-group">
+            <button className="btn btn-block">Submit</button>
           </div>
         </form>
       </section>
