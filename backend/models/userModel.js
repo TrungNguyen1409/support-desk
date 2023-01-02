@@ -1,3 +1,10 @@
+/*
+ Mongoose is a JavaScript object-oriented programming library 
+ that creates a connection between MongoDB and the Node.js JavaScript runtime environment
+*/ 
+
+// models are required by mongoose in order to appropriately connect to MongoDB 
+
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({

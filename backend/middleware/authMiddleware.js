@@ -1,4 +1,14 @@
+
+
 const jwt = require('jsonwebtoken')
+
+/**
+ *  Simple middleware for handling exceptions 
+ *  inside of async express routes and passing them 
+ *  to your express error handlers.
+
+    => with out this middleware, the error would be passed on to the error handling route 
+ */
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 

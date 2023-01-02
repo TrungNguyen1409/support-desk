@@ -1,3 +1,6 @@
+/**
+ *  This file is responsible for the connection between the project and a MongoDB database
+ */
 
 const mongoose = require('mongoose')
 
