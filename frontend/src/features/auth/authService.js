@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { response } from 'express'
 
 const API_URL = '/api/users'
 
